@@ -1,8 +1,10 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "jest-enzyme"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true
+    "jest": true,
+    "node": true,
+    "es6": true
   }
 }

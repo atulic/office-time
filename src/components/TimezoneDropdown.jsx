@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import TimezonePicker from 'react-bootstrap-timezone-picker';
-import { Button } from 'react-bootstrap';
-import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addTimezone } from "../actions/index";
+import TimezonePicker from "react-bootstrap-timezone-picker";
+import { Button } from "react-bootstrap";
+import { bindActionCreators } from "redux";
+import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
 
-export default class TimezoneDropdown extends Component {
+class TimezoneDropdown extends Component {
   constructor() {
     super();
-    this.state = { currentValue: '', absolute: false };
+    this.state = { currentValue: "", times: [] };
   }
 
   handleChange = newValue => this.setState({ currentValue: newValue });
@@ -21,8 +24,25 @@ export default class TimezoneDropdown extends Component {
           absolute={absolute}
           value={currentValue}
         />
-        <Button>Add</Button>
+        <Button onClick={() => this.props.addTimezone(currentValue)}>
+          {" "}
+          Add new Timezone
+        </Button>
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    times: state.times
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ addTimezone: addTimezone }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TimezoneDropdown);
