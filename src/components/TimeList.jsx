@@ -1,11 +1,23 @@
-import React from "react";
-import TimeListItem from "./TimeListItem";
+import { Col, Row } from 'react-bootstrap';
+import React from 'react';
+import { connect } from 'react-redux';
+import TimeListItem from './TimeListItem';
 
-const TimeList = props => {
-  const { times } = props;
-  const timezones = times.map(time => <TimeListItem key={time.id} />);
+const TimeList = (props) => {
+  const { times } = props.times || [];
+  const timezones = times.map((time, index) => (
+    <Col md={6}>
+      <TimeListItem time={time} key={index} />
+    </Col>
+  ));
 
-  return <ul className="col-md-4 list-group">{timezones}</ul>;
+  return <Row>{timezones}</Row>;
 };
 
-export default TimeList;
+function mapStateToProps(state) {
+  return {
+    times: state.times,
+  };
+}
+
+export default connect(mapStateToProps)(TimeList);

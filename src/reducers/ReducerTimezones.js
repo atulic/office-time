@@ -1,12 +1,13 @@
-const initialState = { currentValue: "", absolute: false, times: [] };
+const initialState = { currentValue: '', times: [] };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-    case "ADD_TIMEZONE":
+    case 'ADD_TIMEZONE':
       return {
         ...state,
-        times: [...state.times, action.timezone]
+        times: [...state.times, action.timezone],
       };
+    default:
+      return state;
   }
-  return state;
 }

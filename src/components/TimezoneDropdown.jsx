@@ -1,32 +1,36 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addTimezone } from "../actions/index";
-import TimezonePicker from "react-bootstrap-timezone-picker";
-import { Button } from "react-bootstrap";
-import { bindActionCreators } from "redux";
-import "react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import TimezonePicker from 'react-bootstrap-timezone-picker';
+import { Button } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
+import { addTimezone } from '../actions/index';
+import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
+import './TimezoneDropdown.css';
 
 class TimezoneDropdown extends Component {
   constructor() {
     super();
-    this.state = { currentValue: "", times: [] };
+    this.state = { currentValue: '' };
   }
 
   handleChange = newValue => this.setState({ currentValue: newValue });
 
+
   render() {
-    const { currentValue, absolute } = this.state;
+    const { currentValue } = this.state;
+
     return (
       <div>
         <TimezonePicker
-          placeholder="Select timezone..."
+          placeholder="Select a timezone..."
           onChange={this.handleChange}
-          absolute={absolute}
           value={currentValue}
+          defaultValue="America/Los_Angeles"
+          overflow="false"
         />
-        <Button onClick={() => this.props.addTimezone(currentValue)}>
-          {" "}
-          Add new Timezone
+        <Button onClick={() => addTimezone(currentValue)}>
+          {' '}
+          Add new
         </Button>
       </div>
     );
@@ -34,15 +38,15 @@ class TimezoneDropdown extends Component {
 }
 function mapStateToProps(state) {
   return {
-    times: state.times
+    times: state.times,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addTimezone: addTimezone }, dispatch);
+  return bindActionCreators({ addTimezone }, dispatch);
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TimezoneDropdown);

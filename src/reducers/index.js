@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import ReducerTimes from "./ReducerTimezones";
+import { combineReducers } from 'redux';
+import ReducerTimes from './ReducerTimezones';
 
 const rootReducer = combineReducers({
-  times: ReducerTimes
+  times: ReducerTimes,
 });
 
 export default rootReducer;

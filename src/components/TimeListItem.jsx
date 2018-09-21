@@ -1,9 +1,10 @@
-import React from "react";
+import 'moment-timezone';
+import './TimeListItem.css';
+import Moment from 'react-moment';
+import React from 'react';
 
 const TimeListItem = ({ time }) => (
-  <li className="list-group-item">
-    <div>Timezone to go here...</div>
-  </li>
+  <Moment interval={1000} tz={time} format="dddd, h:mm:ss a" />
 );
 
 export default TimeListItem;
