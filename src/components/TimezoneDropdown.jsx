@@ -7,32 +7,35 @@ import { addTimezone } from '../actions/index';
 import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
 import './TimezoneDropdown.css';
 
+/* eslint-disable */
+
 class TimezoneDropdown extends Component {
   constructor() {
     super();
-    this.state = { currentValue: '' };
+    this.state = { currentValue: '' }; //eslint-disable-line
   }
 
   handleChange = newValue => this.setState({ currentValue: newValue });
-
 
   render() {
     const { currentValue } = this.state;
 
     return (
       <div>
-        <TimezonePicker
-          placeholder="Select a timezone..."
-          onChange={this.handleChange}
-          value={currentValue}
-          defaultValue="America/Los_Angeles"
-          overflow="false"
-        />
-        <Button onClick={() => addTimezone(currentValue)}>
-          {' '}
-          Add new
+        <div>
+          <TimezonePicker
+            placeholder="Select a timezone..."
+            onChange={this.handleChange}
+            value={currentValue}
+            defaultValue="America/Los_Angeles"
+            overflow="false"
+          />
+        </div>
+        <Button onClick={() => this.props.addTimezone(currentValue)}>
+           Add new
         </Button>
       </div>
+
     );
   }
 }
