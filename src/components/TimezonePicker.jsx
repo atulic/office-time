@@ -1,32 +1,39 @@
 import { TimezonePicker, TimezoneDisplayFormat } from '@blueprintjs/timezone';
 import React, { Component } from 'react';
-import { Button, Divider } from '@blueprintjs/core';
+import { Button, Divider, ButtonGroup } from '@blueprintjs/core';
 import { addTimezone } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import './TimezonePicker.css';
 
 class TimezoneDropdown extends Component {
-  state = { timezone: '' };
+  state = { timezone: '', times: [] };
+
+  handleTimezoneChange = timezone => this.setState({ timezone });
 
   render() {
+    const { times } = this.props.times;
+    const { addTimezone } = this.props;
+    const { timezone } = this.state;
+
     return (
       <div>
-        <TimezonePicker
-          value={this.state.timezone}
-          onChange={this.handleTimezoneChange}
-          valueDisplayFormat={TimezoneDisplayFormat.COMPOSITE}
-        />
-        <Button
-          text="Add New"
-          onClick={() => this.props.addTimezone(this.state.timezone)}
-          disabled={!!(this.state.timezone === '')}
-        />
-        <Divider />
+        <ButtonGroup className={'timezone-heading'} vertical={false}>
+          <TimezonePicker
+            value={timezone}
+            onChange={this.handleTimezoneChange}
+            valueDisplayFormat={TimezoneDisplayFormat.COMPOSITE}
+          />
+          <Divider />
+          <Button
+            text="Add New"
+            onClick={() => addTimezone(timezone)}
+            disabled={!!(timezone === '' || times.includes(timezone))}
+          />
+        </ButtonGroup>
       </div>
     );
   }
-
-  handleTimezoneChange = timezone => this.setState({ timezone });
 }
 
 function mapStateToProps(state) {

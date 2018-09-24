@@ -26,8 +26,8 @@ const format = 'ddd, h:mm a';
 class TimeListItem extends Component {
   render() {
     const { time, className } = this.props;
-    const city = formatCityName(time);
-    const working = isBusinessHours(time);
+    const city = time ? formatCityName(time) : '';
+    const working = time ? isBusinessHours(time) : '';
 
     return (
       <Card
