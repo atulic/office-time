@@ -5,10 +5,9 @@ import './TimeList.css';
 
 const TimeList = props => {
   const { times } = props.times;
-  const timezones = times.map(time => (
-    <div className="time-item">
-      <TimeListItem time={time} key={time.id} />
-    </div>
+  console.log(props.times);
+  const timezones = times.map((time, index) => (
+    <TimeListItem time={time} key={index} className={'time-item'} />
   ));
   return <div className="time-container">{timezones}</div>;
 };

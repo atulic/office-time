@@ -1,0 +1,17 @@
+.time-item {
+  width: 40%;
+  margin: 0.5rem;
+  position: relative;
+}
+
+.close-icon {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0.8;
+}
+
+.close-icon:hover {
+  opacity: 0.5;
+  transition: 0.1s;
+}

@@ -1,8 +1,12 @@
 import 'moment-timezone';
 import Moment from 'react-moment';
-import React from 'react';
+import React, { Component } from 'react';
 import moment from 'moment-timezone';
-import { Card, Elevation } from '@blueprintjs/core';
+import { Card, Elevation, Icon } from '@blueprintjs/core';
+import { removeTimezone } from '../actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import './TimeListItem.css';
 
 const formatCityName = time => {
   return time
@@ -19,22 +23,37 @@ const isBusinessHours = time => {
 
 const format = 'ddd, h:mm a';
 
-function TimeListItem({ time }) {
-  var city = formatCityName(time);
-  var working = isBusinessHours(time);
+class TimeListItem extends Component {
+  render() {
+    const { time, className } = this.props;
+    const city = formatCityName(time);
+    const working = isBusinessHours(time);
 
-  return (
-    <Card
-      interactive={false}
-      elevation={Elevation.TWO}
-      className={working ? '' : 'bp3-dark'}
-    >
-      <h5>Current time in {city} is:</h5>
-      <Moment tz={time} format={format} />
-      <p />
-      <p>{`${city} ${working ? 'is' : 'is not'} in the office`}</p>
-    </Card>
-  );
+    return (
+      <Card
+        interactive={false}
+        elevation={Elevation.TWO}
+        className={`${className} ${working ? '' : 'bp3-dark'}`}
+      >
+        <Icon
+          icon="cross"
+          onClick={() => this.props.removeTimezone(time)}
+          className="close-icon"
+        />
+        <h5>Current time in {city} is:</h5>
+        <Moment tz={time} format={format} />
+        <p />
+        <p>{`${city} ${working ? 'is' : 'is not'} in the office`}</p>
+      </Card>
+    );
+  }
 }
 
-export default TimeListItem;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ removeTimezone }, dispatch);
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TimeListItem);
