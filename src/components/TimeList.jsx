@@ -1,24 +1,20 @@
-/* eslint-disable */
+import React from "react";
+import { connect } from "react-redux";
+import TimeListItem from "./TimeListItem";
 
-import { Col, Row } from 'react-bootstrap';
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import TimeListItem from './TimeListItem';
-
-const TimeList = (props) => {
-  const { times } = props.times; //eslint-disable-line
+const TimeList = props => {
+  const { times } = props.times;
   const timezones = times.map(time => (
-    <Col md={6}>
+    <div>
       <TimeListItem time={time} key={time.id} />
-    </Col>
+    </div>
   ));
-  return <Row>{timezones}</Row>;
+  return <div>{timezones}</div>;
 };
 
 function mapStateToProps(state) {
   return {
-    times: state.times,
+    times: state.times
   };
 }
 
