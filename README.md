@@ -1,6 +1,6 @@
 ## About
 
-This is a clock app, built with the intention fo adding a number of cities in different timezones, and it will then display whether that particular city is working. Currently business hours are configured to 8:00am - 5:00p.m. It has some basic persistence using local storage.
+This is a clock app, built with the intention of adding a number of cities in different timezones, and it will then display whether that particular city is working. Currently business hours are configured to 8:00am - 5:00p.m. It has some basic persistence using local storage.
 
 ## Installation
 
